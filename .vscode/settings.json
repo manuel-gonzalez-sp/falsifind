@@ -1,0 +1,26 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        ".dart_tool": true,
+        ".idea": true,
+        "build": true,
+        "custom_lint.log": true,
+        "pubspec.lock": true,
+        ".metadata": true,
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true
+    },
+    "hide-files.files": [
+        ".dart_tool",
+        ".idea",
+        "build",
+        "custom_lint.log",
+        "pubspec.lock",
+        ".metadata"
+    ]
+}
