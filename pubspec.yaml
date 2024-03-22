@@ -45,7 +45,8 @@ dependencies:
   uuid: ^4.3.2
   timeago: ^3.6.1
   flutter_card_swiper: ^7.0.0
-  flutter_sharing_intent: ^1.1.1
+  receive_sharing_intent: ^1.6.7
+  faker_dart: ^0.2.1
 
 dev_dependencies:
   flutter_test:

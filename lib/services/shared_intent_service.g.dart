@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sharing_intent_service.dart';
+part of 'shared_intent_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sharingIntentServiceHash() =>
-    r'acb8554e920ef46f1809171fe897177f4c0b2d47';
+String _$sharedIntentServiceHash() =>
+    r'da377c33a75ba0d3fe0ec4e10633a2a7eda8f86a';
 
-/// See also [SharingIntentService].
-@ProviderFor(SharingIntentService)
-final sharingIntentServiceProvider =
-    StreamNotifierProvider<SharingIntentService, List<SharedFile>>.internal(
-  SharingIntentService.new,
-  name: r'sharingIntentServiceProvider',
+/// See also [SharedIntentService].
+@ProviderFor(SharedIntentService)
+final sharedIntentServiceProvider =
+    StreamNotifierProvider<SharedIntentService, List<SharedMediaFile>>.internal(
+  SharedIntentService.new,
+  name: r'sharedIntentServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$sharingIntentServiceHash,
+      : _$sharedIntentServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SharingIntentService = StreamNotifier<List<SharedFile>>;
+typedef _$SharedIntentService = StreamNotifier<List<SharedMediaFile>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

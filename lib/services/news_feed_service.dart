@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:faker_dart/faker_dart.dart';
 import 'package:falsifind/models/news_item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -7,13 +10,24 @@ part 'news_feed_service.g.dart';
 @Riverpod(keepAlive: true)
 class NewsFeedService extends _$NewsFeedService {
   @override
-  Future<List<NewsItem>> build() async => [
-        NewsItem(id: const Uuid().v4(), title: "El naranjo c la come 1", date: DateTime.now(), content: "Efectivamente es contenido", sourceUrl: "aki.com"),
-        NewsItem(id: const Uuid().v4(), title: "El naranjo c la come 2", date: DateTime.now(), content: "Efectivamente es contenido", sourceUrl: "aki.com"),
-        NewsItem(id: const Uuid().v4(), title: "El naranjo c la come 3", date: DateTime.now(), content: "Efectivamente es contenido", sourceUrl: "aki.com"),
-        NewsItem(id: const Uuid().v4(), title: "El naranjo c la come 4", date: DateTime.now(), content: "Efectivamente es contenido", sourceUrl: "aki.com"),
-        NewsItem(id: const Uuid().v4(), title: "El naranjo c la come 5", date: DateTime.now(), content: "Efectivamente es contenido", sourceUrl: "aki.com"),
-      ];
+  Future<List<NewsItem>> build() async {
+    final data = <NewsItem>[];
+    final faker = Faker.instance;
+    for (var i = 0; i < 15; i++) {
+      final hours = Random().nextInt(72);
+      final news = NewsItem(
+        id: faker.datatype.uuid(),
+        title: faker.lorem.sentence(),
+        consultationDate: DateTime.now().subtract(Duration(hours: hours)),
+        date: DateTime.now(),
+        content: faker.lorem.paragraph(sentenceCount: 30),
+        sourceUrl: faker.internet.url(),
+        coverUrl: faker.image.loremPicsum.grayImage(width: 100, height: 100, seed: faker.datatype.uuid()),
+      );
+      data.add(news);
+    }
+    return data;
+  }
 
   Future<void> loadMore() async {
     final previousState = await future;
