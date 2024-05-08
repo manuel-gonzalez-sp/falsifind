@@ -26,19 +26,20 @@ final appRouter = GoRouter(
             return const NewsSavedScreen();
           },
         ),
-        GoRoute(
-          path: '/user_settings',
-          builder: (BuildContext context, GoRouterState state) {
-            return const UserSettingsScreen();
-          },
-        ),
       ],
     ),
     GoRoute(
       path: '/news_details/:newsId',
       builder: (BuildContext context, GoRouterState state) {
         final newsId = state.pathParameters['newsId'];
-        return NewsDetailsScreen(newsId!);
+        final content = state.extra.toString();
+        return NewsDetailsScreen(newsId!, content: content);
+      },
+    ),
+    GoRoute(
+      path: '/user_settings',
+      builder: (BuildContext context, GoRouterState state) {
+        return const UserSettingsScreen();
       },
     ),
   ],

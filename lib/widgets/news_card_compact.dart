@@ -1,18 +1,22 @@
 import 'package:falsifind/models/news_item.dart';
 import 'package:falsifind/widgets/highlight_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class NewsCardCompact extends StatelessWidget {
+class NewsCardCompact extends HookConsumerWidget {
   const NewsCardCompact(this.item, {super.key, this.isFake = false});
 
   final NewsItem item;
   final bool isFake;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isSaved = useState(false);
+
     return GestureDetector(
       child: Container(
         //height: 200,
@@ -35,14 +39,31 @@ class NewsCardCompact extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Expanded(
-                      child: const HighlightText(
-                        'Fake News',
-                        highlightColor: Color(0xFFfcd7da),
-                        textColor: Color(0xFF9e0313),
-                      ),
-                    ),
-                    IconButton(onPressed: () {}, icon: LineIcon.bookmark())
+                    isFake
+                        ? Expanded(
+                            child: const HighlightText(
+                              'Fake News',
+                              highlightColor: Color(0xFFfcd7da),
+                              textColor: Color(0xFF9e0313),
+                            ),
+                          )
+                        : Expanded(
+                            child: const HighlightText(
+                              'Trustworthy',
+                              highlightColor: Color.fromARGB(255, 183, 255, 166),
+                              textColor: Color.fromARGB(255, 4, 122, 14),
+                            ),
+                          ),
+                    IconButton(
+                      onPressed: () {
+                        isSaved.value = !isSaved.value;
+                      },
+                      icon: isSaved.value
+                          ? LineIcon.bookmark()
+                          : LineIcon.bookmarkAlt(
+                              color: Colors.black12,
+                            ),
+                    )
                   ]),
                   Text('- ${item.title}',
                       textAlign: TextAlign.start,
@@ -56,7 +77,7 @@ class NewsCardCompact extends StatelessWidget {
                     children: [
                       const Spacer(),
                       const LineIcon.clock(),
-                      Text(timeago.format(DateTime(2004))),
+                      Text(timeago.format(item.consultationDate!)),
                     ],
                   ),
                   const SizedBox(height: 8.0),
@@ -66,7 +87,7 @@ class NewsCardCompact extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () => context.push('/news_details/${item.id}'),
+      onTap: () => context.push('/news_details/${item.id}', extra: item.title),
     );
   }
 }
