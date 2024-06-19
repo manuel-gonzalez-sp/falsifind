@@ -1,13 +1,12 @@
 import 'package:falsifind/layouts/home_layout.dart';
+import 'package:falsifind/screens/info/info_screen.dart';
 import 'package:falsifind/screens/news_details/news_details_screen.dart';
-import 'package:falsifind/screens/news_feed/news_feed_screen.dart';
-import 'package:falsifind/screens/news_saved/news_saved.dart';
-import 'package:falsifind/screens/user_settings/user_settings_screen.dart';
+import 'package:falsifind/screens/news_history/news_history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/news_feed',
+  initialLocation: '/news_history',
   routes: [
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
@@ -15,32 +14,25 @@ final appRouter = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: '/news_feed',
+          path: '/news_history',
           builder: (BuildContext context, GoRouterState state) {
-            return const NewsFeedScreen();
+            return const NewsHistoryScreen();
           },
         ),
         GoRoute(
-          path: '/news_saved',
+          path: '/news_details',
           builder: (BuildContext context, GoRouterState state) {
-            return const NewsSavedScreen();
+            final url = state.extra as String?;
+            return NewsDetailsScreen(url);
+          },
+        ),
+        GoRoute(
+          path: '/info',
+          builder: (BuildContext context, GoRouterState state) {
+            return const InfoScreen();
           },
         ),
       ],
-    ),
-    GoRoute(
-      path: '/news_details/:newsId',
-      builder: (BuildContext context, GoRouterState state) {
-        final newsId = state.pathParameters['newsId'];
-        final content = state.extra.toString();
-        return NewsDetailsScreen(newsId!, content: content);
-      },
-    ),
-    GoRoute(
-      path: '/user_settings',
-      builder: (BuildContext context, GoRouterState state) {
-        return const UserSettingsScreen();
-      },
     ),
   ],
 );

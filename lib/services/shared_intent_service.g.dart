@@ -7,7 +7,7 @@ part of 'shared_intent_service.dart';
 // **************************************************************************
 
 String _$sharedIntentServiceHash() =>
-    r'da377c33a75ba0d3fe0ec4e10633a2a7eda8f86a';
+    r'375169f8b25154085c3e86923d047e34005c33f9';
 
 /// See also [SharedIntentService].
 @ProviderFor(SharedIntentService)

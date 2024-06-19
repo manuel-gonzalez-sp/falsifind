@@ -7,7 +7,7 @@ part of 'news_history_service.dart';
 // **************************************************************************
 
 String _$newsHistoryServiceHash() =>
-    r'fc6daf791af5ad924505f4af85996848e2197cc0';
+    r'59a54e10ec8d80101b58c2d39252e0345ac7168d';
 
 /// See also [NewsHistoryService].
 @ProviderFor(NewsHistoryService)

@@ -10,22 +10,23 @@ _$NewsItemImpl _$$NewsItemImplFromJson(Map<String, dynamic> json) =>
     _$NewsItemImpl(
       id: json['id'] as String,
       title: json['title'] as String,
-      date: DateTime.parse(json['date'] as String),
       content: json['content'] as String,
-      sourceUrl: json['sourceUrl'] as String,
+      url: json['url'] as String,
+      consultationDate: DateTime.parse(json['consultationDate'] as String),
       coverUrl: json['coverUrl'] as String?,
-      consultationDate: json['consultationDate'] == null
-          ? null
-          : DateTime.parse(json['consultationDate'] as String),
+      date:
+          json['date'] == null ? null : DateTime.parse(json['date'] as String),
+      truthness: (json['truthness'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$NewsItemImplToJson(_$NewsItemImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'date': instance.date.toIso8601String(),
       'content': instance.content,
-      'sourceUrl': instance.sourceUrl,
+      'url': instance.url,
+      'consultationDate': instance.consultationDate.toIso8601String(),
       'coverUrl': instance.coverUrl,
-      'consultationDate': instance.consultationDate?.toIso8601String(),
+      'date': instance.date?.toIso8601String(),
+      'truthness': instance.truthness,
     };

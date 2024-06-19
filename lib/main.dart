@@ -3,11 +3,13 @@ import 'package:falsifind/services/shared_intent_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:localstorage/localstorage.dart';
 
 import 'config/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initLocalStorage();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (value) => runApp(const ProviderScope(child: FalsiFind())),
   );
@@ -18,18 +20,17 @@ class FalsiFind extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(appThemeModeProvider);
-
     ref.listen(sharedIntentServiceProvider, (previous, next) {
-      next.whenData((value) {
-        ref.read(sharedIntentServiceProvider.notifier).gotoDetails(value);
+      next.whenData((value) async {
+        final sharedData = await ref.read(sharedIntentServiceProvider.notifier).getData(value);
+        if (sharedData != null) {
+          appRouter.push('/news_details', extra: sharedData);
+        }
       });
     });
 
     return MaterialApp.router(
       theme: appThemeLight,
-      darkTheme: appThemeDark,
-      themeMode: themeMode,
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
     );

@@ -22,11 +22,12 @@ NewsItem _$NewsItemFromJson(Map<String, dynamic> json) {
 mixin _$NewsItem {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  String get sourceUrl => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
+  DateTime get consultationDate => throw _privateConstructorUsedError;
   String? get coverUrl => throw _privateConstructorUsedError;
-  DateTime? get consultationDate => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
+  double? get truthness => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,11 +43,12 @@ abstract class $NewsItemCopyWith<$Res> {
   $Res call(
       {String id,
       String title,
-      DateTime date,
       String content,
-      String sourceUrl,
+      String url,
+      DateTime consultationDate,
       String? coverUrl,
-      DateTime? consultationDate});
+      DateTime? date,
+      double? truthness});
 }
 
 /// @nodoc
@@ -64,11 +66,12 @@ class _$NewsItemCopyWithImpl<$Res, $Val extends NewsItem>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? date = null,
     Object? content = null,
-    Object? sourceUrl = null,
+    Object? url = null,
+    Object? consultationDate = null,
     Object? coverUrl = freezed,
-    Object? consultationDate = freezed,
+    Object? date = freezed,
+    Object? truthness = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -79,26 +82,30 @@ class _$NewsItemCopyWithImpl<$Res, $Val extends NewsItem>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      sourceUrl: null == sourceUrl
-          ? _value.sourceUrl
-          : sourceUrl // ignore: cast_nullable_to_non_nullable
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
               as String,
+      consultationDate: null == consultationDate
+          ? _value.consultationDate
+          : consultationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       coverUrl: freezed == coverUrl
           ? _value.coverUrl
           : coverUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      consultationDate: freezed == consultationDate
-          ? _value.consultationDate
-          : consultationDate // ignore: cast_nullable_to_non_nullable
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      truthness: freezed == truthness
+          ? _value.truthness
+          : truthness // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -114,11 +121,12 @@ abstract class _$$NewsItemImplCopyWith<$Res>
   $Res call(
       {String id,
       String title,
-      DateTime date,
       String content,
-      String sourceUrl,
+      String url,
+      DateTime consultationDate,
       String? coverUrl,
-      DateTime? consultationDate});
+      DateTime? date,
+      double? truthness});
 }
 
 /// @nodoc
@@ -134,11 +142,12 @@ class __$$NewsItemImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? date = null,
     Object? content = null,
-    Object? sourceUrl = null,
+    Object? url = null,
+    Object? consultationDate = null,
     Object? coverUrl = freezed,
-    Object? consultationDate = freezed,
+    Object? date = freezed,
+    Object? truthness = freezed,
   }) {
     return _then(_$NewsItemImpl(
       id: null == id
@@ -149,41 +158,47 @@ class __$$NewsItemImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      sourceUrl: null == sourceUrl
-          ? _value.sourceUrl
-          : sourceUrl // ignore: cast_nullable_to_non_nullable
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
               as String,
+      consultationDate: null == consultationDate
+          ? _value.consultationDate
+          : consultationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       coverUrl: freezed == coverUrl
           ? _value.coverUrl
           : coverUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      consultationDate: freezed == consultationDate
-          ? _value.consultationDate
-          : consultationDate // ignore: cast_nullable_to_non_nullable
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      truthness: freezed == truthness
+          ? _value.truthness
+          : truthness // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$NewsItemImpl implements _NewsItem {
+class _$NewsItemImpl extends _NewsItem {
   const _$NewsItemImpl(
       {required this.id,
       required this.title,
-      required this.date,
       required this.content,
-      required this.sourceUrl,
+      required this.url,
+      required this.consultationDate,
       this.coverUrl,
-      this.consultationDate});
+      this.date,
+      this.truthness})
+      : super._();
 
   factory _$NewsItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewsItemImplFromJson(json);
@@ -193,19 +208,21 @@ class _$NewsItemImpl implements _NewsItem {
   @override
   final String title;
   @override
-  final DateTime date;
-  @override
   final String content;
   @override
-  final String sourceUrl;
+  final String url;
+  @override
+  final DateTime consultationDate;
   @override
   final String? coverUrl;
   @override
-  final DateTime? consultationDate;
+  final DateTime? date;
+  @override
+  final double? truthness;
 
   @override
   String toString() {
-    return 'NewsItem(id: $id, title: $title, date: $date, content: $content, sourceUrl: $sourceUrl, coverUrl: $coverUrl, consultationDate: $consultationDate)';
+    return 'NewsItem(id: $id, title: $title, content: $content, url: $url, consultationDate: $consultationDate, coverUrl: $coverUrl, date: $date, truthness: $truthness)';
   }
 
   @override
@@ -215,20 +232,21 @@ class _$NewsItemImpl implements _NewsItem {
             other is _$NewsItemImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.date, date) || other.date == date) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.sourceUrl, sourceUrl) ||
-                other.sourceUrl == sourceUrl) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.consultationDate, consultationDate) ||
+                other.consultationDate == consultationDate) &&
             (identical(other.coverUrl, coverUrl) ||
                 other.coverUrl == coverUrl) &&
-            (identical(other.consultationDate, consultationDate) ||
-                other.consultationDate == consultationDate));
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.truthness, truthness) ||
+                other.truthness == truthness));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, date, content,
-      sourceUrl, coverUrl, consultationDate);
+  int get hashCode => Object.hash(runtimeType, id, title, content, url,
+      consultationDate, coverUrl, date, truthness);
 
   @JsonKey(ignore: true)
   @override
@@ -244,15 +262,17 @@ class _$NewsItemImpl implements _NewsItem {
   }
 }
 
-abstract class _NewsItem implements NewsItem {
+abstract class _NewsItem extends NewsItem {
   const factory _NewsItem(
       {required final String id,
       required final String title,
-      required final DateTime date,
       required final String content,
-      required final String sourceUrl,
+      required final String url,
+      required final DateTime consultationDate,
       final String? coverUrl,
-      final DateTime? consultationDate}) = _$NewsItemImpl;
+      final DateTime? date,
+      final double? truthness}) = _$NewsItemImpl;
+  const _NewsItem._() : super._();
 
   factory _NewsItem.fromJson(Map<String, dynamic> json) =
       _$NewsItemImpl.fromJson;
@@ -262,15 +282,17 @@ abstract class _NewsItem implements NewsItem {
   @override
   String get title;
   @override
-  DateTime get date;
-  @override
   String get content;
   @override
-  String get sourceUrl;
+  String get url;
+  @override
+  DateTime get consultationDate;
   @override
   String? get coverUrl;
   @override
-  DateTime? get consultationDate;
+  DateTime? get date;
+  @override
+  double? get truthness;
   @override
   @JsonKey(ignore: true)
   _$$NewsItemImplCopyWith<_$NewsItemImpl> get copyWith =>
