@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-Future<NewsItem?> extractNewsInfo(String url) async {
-  final response = await http.get(Uri.parse(url));
+Future<NewsItem?> extractNewsInfo(Uri url) async {
+  final response = await http.get(url);
 
   if (response.statusCode == 200) {
     var document = parse(response.body);
@@ -54,7 +54,7 @@ Future<NewsItem?> extractNewsInfo(String url) async {
       url: url,
       consultationDate: DateTime.now(),
       date: DateTime.tryParse(date),
-      coverUrl: Uri.tryParse(coverUrl)?.toString(),
+      coverUrl: Uri.tryParse(coverUrl),
     );
   }
 
@@ -113,11 +113,11 @@ Future<NewsItem?> extractNewsInfoFromWebView(WebViewController controller) async
 
   return NewsItem(
     id: const Uuid().v6(),
-    url: url!,
+    url: Uri.parse(url!),
     title: result['title'],
     content: result['content'],
     date: DateTime.tryParse(result['date']),
-    coverUrl: Uri.tryParse(result['coverUrl'])?.toString(),
+    coverUrl: Uri.tryParse(result['coverUrl']),
     consultationDate: DateTime.now(),
   );
 }

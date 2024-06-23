@@ -23,9 +23,9 @@ mixin _$NewsItem {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  String get url => throw _privateConstructorUsedError;
+  Uri get url => throw _privateConstructorUsedError;
   DateTime get consultationDate => throw _privateConstructorUsedError;
-  String? get coverUrl => throw _privateConstructorUsedError;
+  Uri? get coverUrl => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   double? get truthness => throw _privateConstructorUsedError;
 
@@ -44,9 +44,9 @@ abstract class $NewsItemCopyWith<$Res> {
       {String id,
       String title,
       String content,
-      String url,
+      Uri url,
       DateTime consultationDate,
-      String? coverUrl,
+      Uri? coverUrl,
       DateTime? date,
       double? truthness});
 }
@@ -89,7 +89,7 @@ class _$NewsItemCopyWithImpl<$Res, $Val extends NewsItem>
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Uri,
       consultationDate: null == consultationDate
           ? _value.consultationDate
           : consultationDate // ignore: cast_nullable_to_non_nullable
@@ -97,7 +97,7 @@ class _$NewsItemCopyWithImpl<$Res, $Val extends NewsItem>
       coverUrl: freezed == coverUrl
           ? _value.coverUrl
           : coverUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Uri?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -122,9 +122,9 @@ abstract class _$$NewsItemImplCopyWith<$Res>
       {String id,
       String title,
       String content,
-      String url,
+      Uri url,
       DateTime consultationDate,
-      String? coverUrl,
+      Uri? coverUrl,
       DateTime? date,
       double? truthness});
 }
@@ -165,7 +165,7 @@ class __$$NewsItemImplCopyWithImpl<$Res>
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Uri,
       consultationDate: null == consultationDate
           ? _value.consultationDate
           : consultationDate // ignore: cast_nullable_to_non_nullable
@@ -173,7 +173,7 @@ class __$$NewsItemImplCopyWithImpl<$Res>
       coverUrl: freezed == coverUrl
           ? _value.coverUrl
           : coverUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Uri?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -210,11 +210,11 @@ class _$NewsItemImpl extends _NewsItem {
   @override
   final String content;
   @override
-  final String url;
+  final Uri url;
   @override
   final DateTime consultationDate;
   @override
-  final String? coverUrl;
+  final Uri? coverUrl;
   @override
   final DateTime? date;
   @override
@@ -267,9 +267,9 @@ abstract class _NewsItem extends NewsItem {
       {required final String id,
       required final String title,
       required final String content,
-      required final String url,
+      required final Uri url,
       required final DateTime consultationDate,
-      final String? coverUrl,
+      final Uri? coverUrl,
       final DateTime? date,
       final double? truthness}) = _$NewsItemImpl;
   const _NewsItem._() : super._();
@@ -284,11 +284,11 @@ abstract class _NewsItem extends NewsItem {
   @override
   String get content;
   @override
-  String get url;
+  Uri get url;
   @override
   DateTime get consultationDate;
   @override
-  String? get coverUrl;
+  Uri? get coverUrl;
   @override
   DateTime? get date;
   @override

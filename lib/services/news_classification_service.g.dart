@@ -7,7 +7,7 @@ part of 'news_classification_service.dart';
 // **************************************************************************
 
 String _$newsClassificationServiceHash() =>
-    r'8ad29a81e3e7dc25d2ed0f311c1f4eccc09b0eb2';
+    r'd249ea638975cdde74fde65ee7af50c1d5567634';
 
 /// See also [NewsClassificationService].
 @ProviderFor(NewsClassificationService)

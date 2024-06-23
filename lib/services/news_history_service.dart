@@ -44,7 +44,7 @@ class NewsHistoryService extends _$NewsHistoryService {
     _saveItems(newState);
   }
 
-  Future<NewsItem?> getItem(String url, WebViewController controller) async {
+  Future<NewsItem?> getItem(Uri url, WebViewController controller) async {
     final previousState = await future;
 
     final items = previousState.where((item) => item.url == url);
@@ -73,5 +73,21 @@ class NewsHistoryService extends _$NewsHistoryService {
   void _saveItems(List<NewsItem> items) {
     final data = jsonEncode(items);
     localStorage.setItem(kHistoryStorageKey, data);
+  }
+}
+
+@riverpod
+class NewsHistoyFiltered extends _$NewsHistoyFiltered {
+  @override
+  Future<List<NewsItem>> build() async {
+    final historyItems = await ref.watch(newsHistoryServiceProvider.future);
+    return historyItems;
+  }
+
+  Future<void> filter(String text) async {
+    final historyItems = await ref.watch(newsHistoryServiceProvider.future);
+
+    final newsState = historyItems.where((item) => item.title.toLowerCase().contains(text.toLowerCase())).toList();
+    state = AsyncData([...newsState]);
   }
 }

@@ -18,7 +18,6 @@ class SharedIntentService extends _$SharedIntentService {
     if (value.isNotEmpty) {
       final data = value.last.path;
       return data;
-      //await appRouter.push('/news_details/external', extra: data);
     }
     return null;
   }

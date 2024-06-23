@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/news_history',
+  initialLocation: '/',
   routes: [
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
@@ -14,17 +14,19 @@ final appRouter = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: '/news_history',
+          path: '/',
           builder: (BuildContext context, GoRouterState state) {
             return const NewsHistoryScreen();
           },
-        ),
-        GoRoute(
-          path: '/news_details',
-          builder: (BuildContext context, GoRouterState state) {
-            final url = state.extra as String?;
-            return NewsDetailsScreen(url);
-          },
+          routes: [
+            GoRoute(
+              path: 'news_details',
+              builder: (BuildContext context, GoRouterState state) {
+                final url = state.extra as Uri;
+                return NewsDetailsScreen(url);
+              },
+            ),
+          ],
         ),
         GoRoute(
           path: '/info',

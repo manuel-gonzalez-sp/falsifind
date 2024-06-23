@@ -12,30 +12,26 @@ class AppThemeMode extends _$AppThemeMode {
 }
 
 class AppColors {
-  static const lightBackground = Color(0xfff2f2f2);
-  static const darkBackground = Colors.black;
+  static const background = Color(0xfff2f2f2);
+  static const onBackground = Colors.black;
 
-  static const lightTertiary = Colors.lightBlueAccent;
-  static const darkTertiary = Colors.blue;
-
-  static const lightOutline = Color(0xFF666666);
-  static const darkOutline = Color(0xfff2f2f2);
-
-  static const secondary = Color(0xff666666);
+  static const secondary = Color(0xff1f1f1f);
   static const onSecondary = Colors.white;
+
+  static const outline = Color(0xff666666);
+  static const accent = Color(0xff198aa6);
+  static const onAccent = Colors.white;
 
   static const danger = Color(0xffcc254c);
   static const onDanger = Colors.white;
 
   static const success = Color(0xff32b85e);
   static const onSuccess = Colors.white;
-
-  static const accent = Colors.white;
 }
 
 final _appTheme = ThemeData(
   fontFamily: "DidactGothic",
-  scaffoldBackgroundColor: AppColors.lightBackground,
+  scaffoldBackgroundColor: AppColors.background,
   textTheme: const TextTheme(
     titleLarge: TextStyle(fontWeight: FontWeight.w400, fontSize: 22, fontFamily: 'SecularOne'),
     titleMedium: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
@@ -48,6 +44,6 @@ final _appTheme = ThemeData(
 final appThemeLight = _appTheme.copyWith(
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
-    surface: AppColors.lightBackground,
+    surface: AppColors.background,
   ),
 );

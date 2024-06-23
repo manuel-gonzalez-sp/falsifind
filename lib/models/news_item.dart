@@ -13,24 +13,16 @@ class NewsItem with _$NewsItem {
     required String id,
     required String title,
     required String content,
-    required String url,
+    required Uri url,
     required DateTime consultationDate,
-    String? coverUrl,
+    Uri? coverUrl,
     DateTime? date,
     double? truthness,
   }) = _NewsItem;
 
   factory NewsItem.fromJson(Map<String, dynamic> json) => _$NewsItemFromJson(json);
 
-  //bool isFake() => truthness > 0.5;
-
-  String? siteName() {
-    final uri = Uri.tryParse(url);
-    if (uri != null) {
-      return uri.host;
-    }
-    return null;
-  }
+  bool? get isTrue => truthness != null ? (truthness! > 0.75) : null;
 
   String dateString() {
     return timeago.format(date ?? consultationDate, locale: 'es').toCapitalized();

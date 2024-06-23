@@ -1,8 +1,8 @@
 import 'package:falsifind/config/app_router.dart';
 import 'package:falsifind/config/app_theme.dart';
 import 'package:falsifind/models/news_item.dart';
-import 'package:falsifind/widgets/versus_line.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icon.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard(this.item, {super.key});
@@ -16,7 +16,7 @@ class NewsCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: const BoxDecoration(
-          border: Border(bottom: BorderSide(color: AppColors.secondary)),
+          border: Border(bottom: BorderSide(color: AppColors.outline)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -30,22 +30,37 @@ class NewsCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      if (item.siteName() != null)
+                      Row(children: [
                         Text(
-                          item.siteName()!,
+                          item.url.host,
                           textAlign: TextAlign.left,
-                          style: const TextStyle(color: Color(0xFF80acf2), height: 2),
+                          style: const TextStyle(color: AppColors.accent, height: 2),
                         ),
+                        Text(
+                          ' - ${item.dateString()}',
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(color: AppColors.secondary),
+                        ),
+                      ]),
                       Text(
                         item.title,
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      Text(
-                        item.dateString(),
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(color: AppColors.secondary),
-                      ),
+                      const SizedBox(height: 2),
+                      if (item.truthness != null)
+                        Row(children: [
+                          item.isTrue! ? const LineIcon.thumbsUp(color: AppColors.success) : const LineIcon.thumbsDown(color: AppColors.danger),
+                          item.isTrue!
+                              ? Text(
+                                  '${(item.truthness! * 100.0).toInt()}% Verdadero',
+                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.success),
+                                )
+                              : Text(
+                                  '${(100.0 - item.truthness! * 100.0).toInt()}% Falso',
+                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.danger),
+                                ),
+                        ]),
                     ],
                   ),
                 ),
@@ -59,115 +74,14 @@ class NewsCard extends StatelessWidget {
                         color: Colors.black,
                         backgroundBlendMode: BlendMode.saturation,
                       ),
-                      child: Image.network(item.coverUrl!, fit: BoxFit.cover),
+                      child: Image.network(item.coverUrl!.toString(), fit: BoxFit.cover),
                     ),
                   )
               ],
             ),
-            const SizedBox(height: 2),
-            if (item.truthness != null) VersusLine(item.truthness!),
-            // if (item.truthness != null)
-            //   Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-            //     item.truthness! > 0.5
-            //         ? LineIcon.thumbsUp(
-            //             color: AppColors.success,
-            //           )
-            //         : LineIcon.thumbsDown(color: AppColors.danger),
-            //     Text(
-            //       item.truthness! > 0.5 ? '${item.truthness}% Verdadero' : '${(1 - item.truthness!) * 100}% Falso',
-            //       style: TextStyle(color: item.truthness! > 0.5 ? AppColors.success : AppColors.danger),
-            //       textAlign: TextAlign.end,
-            //     ),
-            //   ]),
           ],
         ),
       ),
     );
   }
 }
-
-
-
-// import 'package:falsifind/models/news_item.dart';
-// import 'package:falsifind/widgets/highlight_text.dart';
-// import 'package:flutter/material.dart';
-// import 'package:go_router/go_router.dart';
-// import 'package:line_icons/line_icon.dart';
-// import 'package:timeago/timeago.dart' as timeago;
-
-// class NewsCard extends StatelessWidget {
-//   const NewsCard(this.item, {super.key});
-
-//   final NewsItem item;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       child: Container(
-//         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
-//         decoration: BoxDecoration(
-//           color: Theme.of(context).colorScheme.background,
-//           border: const Border(bottom: BorderSide(color: Colors.black12)),
-//         ),
-//         child: Column(
-//           mainAxisSize: MainAxisSize.min,
-//           crossAxisAlignment: CrossAxisAlignment.stretch,
-//           children: [
-//             const HighlightText(
-//               'Fake News',
-//               highlightColor: Color(0xFFfcd7da),
-//               textColor: Color(0xFF9e0313),
-//             ),
-//             Text('- ${item.title}',
-//                 textAlign: TextAlign.start,
-//                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-//                       fontFamily: 'SecularOne',
-//                     )),
-//             const SizedBox(height: 4.0),
-//             if (item.coverUrl != null)
-//               Container(
-//                 decoration: BoxDecoration(
-//                   //color: Colors.black12,
-//                   border: Border.all(color: Colors.black, width: 1.5),
-//                 ),
-//                 margin: const EdgeInsets.only(left: 12.0, top: 20.0),
-//                 child: FractionalTranslation(
-//                   translation: const Offset(-0.025, -0.065),
-//                   child: AspectRatio(
-//                       aspectRatio: 16.0 / 9.0,
-//                       child: Container(
-//                         foregroundDecoration: const BoxDecoration(
-//                           color: Colors.black,
-//                           backgroundBlendMode: BlendMode.saturation,
-//                         ),
-//                         child: Image.network(
-//                           item.coverUrl!,
-//                           fit: BoxFit.cover,
-//                         ),
-//                       )),
-//                 ),
-//               ),
-//             const SizedBox(height: 8.0),
-//             Text(
-//               item.content,
-//               maxLines: 4,
-//               overflow: TextOverflow.ellipsis,
-//               softWrap: true,
-//             ),
-//             const SizedBox(height: 12.0),
-//             Row(
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               mainAxisSize: MainAxisSize.max,
-//               children: [
-//                 const Spacer(),
-//                 const LineIcon.clock(),
-//                 Text(timeago.format(item.date)),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//       onTap: () => context.push('/news_details/${item.id}'),
-//     );
-//   }
-// }
